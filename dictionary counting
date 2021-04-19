@@ -1,0 +1,23 @@
+name = input("Enter file:")
+if len(name) < 1: name = "mbox-short.txt"
+
+handle = open(name)
+
+sendercount = {}
+
+
+for x in handle:
+    if x.startswith("From "):
+        sender = x.split()
+        sender = sender[1]
+        sendercount[sender] = sendercount.get(sender,0) + 1
+
+bigword = None
+bigcount = None
+
+for sender, count in sendercount.items():
+    if bigcount is None or count > bigcount:
+        bigword = sender
+        bigcount = count
+
+print(bigword, bigcount)
