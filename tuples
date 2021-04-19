@@ -1,0 +1,31 @@
+name = input("Enter file:")
+if len(name) < 1 : name = "mbox-short.txt"
+handle = open(name)
+
+lt = []
+dt = {}
+
+for h in handle:
+    h.rstrip()
+    if h.startswith("From "):
+        h = h.split()
+        h = h[5]
+        h = h.split(":")
+        h = h[0]
+
+        lt.append(h)
+
+for l in lt:
+    dt[l] = dt.get(l,0) + 1
+
+print(dt)
+
+nlt = []
+for k, v in dt.items():
+    new = (k,v)
+    nlt.append(new)
+
+nlt = sorted(nlt)
+
+for k,v in nlt:
+    print(k,v)
